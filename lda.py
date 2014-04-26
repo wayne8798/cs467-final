@@ -4,7 +4,10 @@ fin = open('data/test.txt', 'r')
 documents = fin.readlines()
 fin.close()
 
-stoplist = set('for a of the and to in'.split())
+fstop = open('stopwords.txt', 'r')
+stoplist = set(map(lambda x: x[:-1], fstop.readlines()))
+fstop.close()
+
 texts = [[word for word in document.lower().split() if word not in stoplist]
          for document in documents]
 
@@ -16,8 +19,16 @@ texts = [[word for word in text if word not in tokens_once]
 dictionary = corpora.Dictionary(texts)
 corpus = [dictionary.doc2bow(text) for text in texts]
 
-lda = models.ldamodel.LdaModel(corpus, num_topics=3)
+lda = models.ldamodel.LdaModel(corpus, num_topics=5)
 
-print dictionary.token2id
-print lda.show_topics()
-
+rev_dict = {v:k for k,v in dictionary.token2id.items()}
+topics = lda.show_topics(topn=10, formatted=False)
+t_count = 1
+for t in topics:
+    print 'Topic %d' % t_count
+    t_count += 1
+    for pair in t:
+        weight = pair[0]
+        word = rev_dict[int(pair[1])]
+        print word + ': ' + str(weight)
+    print '==========================='
