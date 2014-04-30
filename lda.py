@@ -1,6 +1,6 @@
 from gensim import corpora, models, similarities
 
-fin = open('data/test.txt', 'r')
+fin = open('data/history.txt', 'r')
 documents = fin.readlines()
 fin.close()
 
@@ -19,10 +19,11 @@ texts = [[word for word in text if word not in tokens_once]
 dictionary = corpora.Dictionary(texts)
 corpus = [dictionary.doc2bow(text) for text in texts]
 
-lda = models.ldamodel.LdaModel(corpus, num_topics=5)
+lda = models.ldamodel.LdaModel(corpus, num_topics=1)
+print lda[corpus[0]]
 
 rev_dict = {v:k for k,v in dictionary.token2id.items()}
-topics = lda.show_topics(topn=10, formatted=False)
+topics = lda.show_topics(topn=20, formatted=False)
 t_count = 1
 for t in topics:
     print 'Topic %d' % t_count
