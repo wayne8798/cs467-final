@@ -151,7 +151,7 @@ for y in range(1950, 2015):
         d = {}
         d['f'] = hls.count(w)
         d['w'] = w
-        foo_ls.append(d)
+        his_ls.append(d)
     dic['his'] = {'kw': his_ls}
     try:
         dic['his']['sub'] = obj_dict[y]['history']['sub']
