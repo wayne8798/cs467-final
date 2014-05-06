@@ -71,7 +71,7 @@ farticles = open('data/articles.csv', 'r')
 asets = {}
 for line in farticles.readlines():
     time = int(line.split(',')[0])
-    doc = ' '.join(line.split(',')[1:-1])
+    doc = ' '.join(line.split(',')[1:])
     clean_doc = ''
     for c in doc:
         if not c in [',', '.', '[', ']', '(', ')', '-']:
