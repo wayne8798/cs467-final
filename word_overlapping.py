@@ -349,7 +349,7 @@ food_total = float(overall_obj_dict['food']['obj'] +
                    overall_obj_dict['food']['sub'])
 food_dic['sub'] = overall_obj_dict['food']['sub'] / food_total
 food_dic['obj'] = overall_obj_dict['food']['obj'] / food_total
-food_len = float(len(hf_overlap) + len(f_uniq))
+food_len = float(len(overall_fset))
 food_dic['his'] = len(hf_overlap) / food_len
 food_dic['media'] = len(af_overlap) / food_len
 overall_data['food'] = food_dic
